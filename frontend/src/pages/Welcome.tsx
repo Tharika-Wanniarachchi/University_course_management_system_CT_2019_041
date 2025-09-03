@@ -25,38 +25,6 @@ export default function Welcome() {
     setAuthMode(mode);
   };
 
-//   const features = [
-//     {
-//       icon: <GraduationCap className="h-5 w-5 text-primary" />,
-//       title: "Student Management",
-//       description: "Easily manage student records, enrollments, and academic progress."
-//     },
-//     {
-//       icon: <BookCheck className="h-5 w-5 text-primary" />,
-//       title: "Course Catalog",
-//       description: "Browse and manage courses with detailed descriptions and requirements."
-//     },
-//     {
-//       icon: <Users className="h-5 w-5 text-primary" />,
-//       title: "Faculty Dashboard",
-//       description: "Tools for instructors to manage courses, assignments, and grades."
-//     },
-//     {
-//       icon: <BarChart3 className="h-5 w-5 text-primary" />,
-//       title: "Analytics",
-//       description: "Track student performance and course statistics with detailed reports."
-//     },
-//     {
-//       icon: <FileText className="h-5 w-5 text-primary" />,
-//       title: "Document Management",
-//       description: "Store and organize course materials, syllabi, and resources."
-//     },
-//     {
-//       icon: <Calendar className="h-5 w-5 text-primary" />,
-//       title: "Scheduling",
-//       description: "Manage class schedules, exams, and academic calendar events."
-//     }
-//   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 flex items-center justify-center p-4 relative overflow-hidden">
@@ -95,25 +63,6 @@ export default function Welcome() {
             </p>
           </div>
 
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="flex items-start space-x-3 p-3 rounded-lg bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-colors"
-              >
-                <div className="p-1.5 rounded-md bg-primary/10">
-                  {feature.icon}
-                </div>
-                <div>
-                  <h3 className="font-medium">{feature.title}</h3>
-                  <p className="text-sm text-muted-foreground">{feature.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div> */}
 
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <Button
@@ -143,29 +92,6 @@ export default function Welcome() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          {/* Auth Tabs */}
-          {/* <div className="flex border-b border-border">
-            <button
-              onClick={() => setAuthMode('login')}
-              className={`flex-1 py-4 px-6 text-center font-medium transition-colors ${
-                authMode === 'login'
-                  ? 'text-primary border-b-2 border-primary'
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
-            >
-              Sign In
-            </button>
-            <button
-              onClick={() => setAuthMode('register')}
-              className={`flex-1 py-4 px-6 text-center font-medium transition-colors ${
-                authMode === 'register'
-                  ? 'text-primary border-b-2 border-primary'
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
-            >
-              Create Account
-            </button>
-          </div> */}
 
           {/* Auth Content */}
           <div className="px-8">

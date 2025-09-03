@@ -19,12 +19,8 @@ export function Header() {
     const handleSignOut = async () => {
       try {
         await logout();
-        // Optional: Show a success toast
-        // toast({ title: "Signed out successfully" });
       } catch (error) {
         console.error('Sign out error:', error);
-        // Optional: Show an error toast
-        // toast({ title: "Error signing out", variant: "destructive" });
       }
     };
   return (

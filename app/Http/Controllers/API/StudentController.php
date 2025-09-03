@@ -15,7 +15,6 @@ class StudentController extends Controller
         try {
             $students = User::where('role', User::ROLE_STUDENT)
                 ->select(['id', 'name', 'email', 'created_at', 'approved'])
-                // ->withCount('courses')
                 ->orderByDesc('created_at')
                 ->get()
                 ->map(function ($student) {

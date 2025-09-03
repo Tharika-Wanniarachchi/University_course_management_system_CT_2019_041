@@ -11,50 +11,6 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    // public function index(Request $request)
-    // {
-    //     $stats = [
-    //         'users' => User::count(),
-    //         'students' => User::where('role', User::ROLE_STUDENT)->count(),
-    //         'lecturers' => User::where('role', User::ROLE_LECTURER)->count(),
-    //         'admins' => User::where('role', User::ROLE_ADMIN)->count(),
-    //         'pendingLecturers' => User::where('role', User::ROLE_LECTURER)->where('approved', 0)->count(),
-    //         'courses' => Course::count(),
-    //         'activeCourses' => Course::where('status', 'Active')->count(),
-    //         'results' => Result::count(),
-    //         'pendingRegistrations' => Enrollment::where('status', 'Pending')->count(),
-    //     ];
-
-    //     $recent = collect([
-    //         User::latest()->take(6)->get(['id','name','email','role','created_at'])->map(fn($u) => [
-    //             'type' => 'user', 'id' => $u->id, 'title' => $u->name,
-    //             'subtitle' => ucfirst($u->role), 'meta' => $u->email, 'at' => $u->created_at,
-    //         ]),
-    //         Course::latest()->take(6)->get(['id','title','code','status','created_at'])->map(fn($c) => [
-    //             'type' => 'course', 'id' => $c->id, 'title' => $c->title,
-    //             'subtitle' => $c->code, 'meta' => $c->status, 'at' => $c->created_at,
-    //         ]),
-    //         Result::with(['student:id,name','course:id,title,code'])
-    //             ->latest()->take(6)->get(['id','student_id','course_id','marks','created_at'])
-    //             ->map(fn($r) => [
-    //                 'type' => 'result', 'id' => $r->id,
-    //                 'title' => $r->student?->name ?? "Student #{$r->student_id}",
-    //                 'subtitle' => $r->course?->title, 'meta' => ($r->course?->code ? $r->course->code.' • ' : '').'Marks: '.$r->marks,
-    //                 'at' => $r->created_at,
-    //             ]),
-    //         Enrollment::with(['student:id,name','course:id,title,code'])
-    //             ->latest()->take(6)->get(['id','student_id','course_id','status','created_at'])
-    //             ->map(fn($e) => [
-    //                 'type' => 'registration', 'id' => $e->id,
-    //                 'title' => $e->student?->name ?? "Student #{$e->student_id}",
-    //                 'subtitle' => $e->course?->title, 'meta' => ($e->course?->code ? $e->course->code.' • ' : '').$e->status,
-    //                 'at' => $e->created_at,
-    //             ]),
-    //     ])->flatten(1)->sortByDesc('at')->values()->take(10);
-
-    //     return response()->json(['stats' => $stats, 'recent' => $recent]);
-    // }
-
     public function studentDashboard($id)
     {
         try {

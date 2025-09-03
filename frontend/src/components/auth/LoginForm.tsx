@@ -63,16 +63,7 @@ export function LoginForm({ onSwitchToRegister }: LoginFormProps) {
   };
 
   return (
-    // <div className="flex items-center justify-center py-20">
-    // <Card className="w-full max-w-md border-none">
-    //   <CardHeader className="space-y-1">
-    //     <CardTitle className="text-2xl font-bold text-center">
-    //       Login
-    //     </CardTitle>
-    //     <CardDescription className="text-center">
-    //       Enter your email and password to access your account
-    //     </CardDescription>
-    //   </CardHeader>
+
     <Card className="border border-primary/10 shadow-xl rounded-2xl overflow-hidden">
             <div className="bg-gradient-to-r from-primary to-accent p-7 relative overflow-hidden">
               <div className="absolute -right-10 -top-10 w-32 h-32 rounded-full bg-white/5"></div>
@@ -118,7 +109,7 @@ export function LoginForm({ onSwitchToRegister }: LoginFormProps) {
             </Button>
             <div className="text-sm text-center text-gray-500">
               Don't have an account?{' '}
-              <button 
+              <button
                 type="button"
                 onClick={onSwitchToRegister}
                 className="font-medium text-primary hover:underline"

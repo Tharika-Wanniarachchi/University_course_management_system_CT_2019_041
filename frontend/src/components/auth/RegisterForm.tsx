@@ -80,7 +80,7 @@ export function RegisterForm({ onSwitchToLogin }: RegisterFormProps) {
         email: formData.email,
         password: formData.password,
         password_confirmation: formData.password_confirmation,
-        role: formData.role, // Make sure this is included
+        role: formData.role,
       };
 
     // Reset all errors

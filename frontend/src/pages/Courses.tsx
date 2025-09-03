@@ -66,12 +66,6 @@ export default function Courses() {
 
   const { user, isLoading: authLoading, isAuthenticated } = useAuth();
 
-  //   // In a real app, this would come from your auth context/state
-  //   const [currentUser] = useState<User>({
-  //     id: 1, // This would come from auth context
-  //     role: "student",
-  //   });
-
   // Fetch courses on component mount
   useEffect(() => {
     const fetchCourses = async () => {

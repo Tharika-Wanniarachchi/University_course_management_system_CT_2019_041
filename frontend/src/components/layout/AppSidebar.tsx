@@ -29,16 +29,11 @@ const navigationItems = [
   { title: "Dashboard", url: "/dashboard", icon: Home },
   { title: "Students", url: "/students", icon: Users },
   { title: "Lecturers", url: "/lecturers", icon: ClipboardList },
-//   { title: "Registrations", url: "/registrations", icon: Users },
-//   { title: "Schedule", url: "/schedule", icon: Calendar },
-    { title: "Courses", url: "/courses", icon: BookOpen },
+  { title: "Courses", url: "/courses", icon: BookOpen },
   { title: "Results", url: "/results", icon: Trophy },
-//   { title: "Reports", url: "/reports", icon: BarChart3 },
-//   { title: "Documents", url: "/documents", icon: FileText },
 ];
 
 const systemItems = [
-//   { title: "Settings", url: "/settings", icon: Settings },
 ];
 
 export function AppSidebar() {
