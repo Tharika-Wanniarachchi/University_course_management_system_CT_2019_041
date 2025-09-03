@@ -391,7 +391,7 @@ export default function Results() {
     <div className="space-y-6">
     <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Exam Student Results</h1>
+          <h1 className="text-3xl font-bold">Student Exam Results</h1>
           <p className="text-muted-foreground">View your examination results and academic progress.</p>
         </div>
       </div>

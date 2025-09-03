@@ -36,7 +36,7 @@ class RegisteredUserController extends Controller
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'role' => $role, // Use the role from the request
-            'approved' => $validated['role'] === 'student' ? 1 : null, // Auto-approve students, set null for lecturers
+            'approved' => $role === 'student' ? 1 : null, // Auto-approve students, set null for lecturers
         ]);
 
         \Log::info('Created user:', $user->toArray());
