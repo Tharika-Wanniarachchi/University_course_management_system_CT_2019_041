@@ -21,10 +21,12 @@ return [
 
     'allowed_origins' => [
         'http://localhost:3000', // Default React port
-        'http://localhost:8080',
+        'http://localhost:8000', // Laravel dev server
+        'http://localhost:8080', // Vite dev server
         'http://localhost:8081',
         'http://localhost:5173', // Vite default port
         'http://127.0.0.1:3000',
+        'http://127.0.0.1:8000',
         'http://127.0.0.1:8080',
         'http://127.0.0.1:5173',
     ],

@@ -14,25 +14,28 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Create admin user
-        $this->call(AdminUserSeeder::class);
+        //$this->call(AdminUserSeeder::class);
 
         // Create test users for each role
         User::factory()->create([
             'name' => 'Admin User',
-            'email' => 'admin@example.com',
+            'email' => 'admin@gmail.com',
             'role' => User::ROLE_ADMIN,
+            'approved' => 1,
         ]);
 
         User::factory()->create([
             'name' => 'Lecturer User',
-            'email' => 'lecturer@example.com',
+            'email' => 'lecturer@gmail.com',
             'role' => User::ROLE_LECTURER,
+            'approved' => 1,
         ]);
 
         User::factory()->create([
             'name' => 'Student User',
-            'email' => 'student@example.com',
+            'email' => 'student@gmail.com',
             'role' => User::ROLE_STUDENT,
+            'approved' => 1,
         ]);
     }
 }
