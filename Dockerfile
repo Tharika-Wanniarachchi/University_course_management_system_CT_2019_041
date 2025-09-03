@@ -1,71 +1,48 @@
-FROM php:8.2-fpm
+# ---------- Base: PHP-FPM ----------
+    FROM php:8.2-fpm
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip \
-    libpq-dev \
-    libzip-dev \
-    nginx \
-    supervisor \
-    nodejs \
-    npm \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && npm install -g npm@latest
+    ARG DEBIAN_FRONTEND=noninteractive
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip opcache
+    # System deps (nginx, supervisord, envsubst, node for SPA build)
+    RUN apt-get update && apt-get install -y \
+        git curl unzip zip \
+        libzip-dev libpng-dev libonig-dev libxml2-dev \
+        nginx supervisor gettext-base \
+        nodejs npm \
+     && docker-php-ext-install pdo_mysql mbstring bcmath exif gd zip opcache \
+     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+    # Composer
+    COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Configure PHP-FPM
-RUN mkdir -p /var/run/php && \
-    touch /var/run/php/php8.2-fpm.sock
+    WORKDIR /var/www/html
 
-# Set working directory
-WORKDIR /var/www/html
+    # Install PHP deps first for layer caching
+    COPY composer.json composer.lock ./
+    RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
 
-# Copy application files
-COPY . .
+    # Copy the rest of the app
+    COPY . .
 
-# Create required directories and set permissions
-RUN mkdir -p storage/framework/{sessions,views,cache} storage/logs bootstrap/cache \
-    && chmod -R 777 storage bootstrap/cache
+    # Build frontend (if present) and place artifacts under public/spa
+    RUN if [ -d "./frontend" ]; then \
+          cd frontend && npm ci && npm run build && cd .. && \
+          mkdir -p public/spa && cp -r frontend/dist/* public/spa/; \
+        fi
 
-# Install dependencies and optimize
-RUN composer install --no-dev --optimize-autoloader --no-interaction \
-    && php artisan config:cache \
-    && php artisan route:cache \
-    && php artisan view:cache
+    # Laravel writable dirs and sane permissions
+    RUN mkdir -p storage/framework/{cache,sessions,views} storage/logs bootstrap/cache \
+     && chown -R www-data:www-data storage bootstrap/cache \
+     && chmod -R 775 storage bootstrap/cache
 
-# Create storage link and set permissions
-RUN php artisan storage:link \
-    && chown -R www-data:www-data /var/www/html/storage \
-    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+    # Nginx template, supervisord, entrypoint
+    COPY docker/nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
+    COPY docker/supervisord.conf /etc/supervisord.conf
+    COPY docker/entrypoint.sh /entrypoint.sh
+    RUN chmod +x /entrypoint.sh
 
-# Configure supervisor
-COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+    # Railway/HTTP port
+    EXPOSE 8080
 
-# Copy Nginx config
-COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
-
-# Build frontend if exists
-RUN if [ -d "frontend" ]; then \
-    cd frontend && \
-    npm ci && \
-    npm run build && \
-    cd ..; \
-    fi
-
-# Expose port 9000 for PHP-FPM
-EXPOSE 9000
-
-# Start supervisor
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+    # Start via entrypoint (renders nginx conf, warms Laravel, starts supervisord)
+    ENTRYPOINT ["/entrypoint.sh"]
