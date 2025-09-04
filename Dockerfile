@@ -27,6 +27,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN mkdir -p /var/run/php
 RUN touch /var/run/php/php8.2-fpm.sock
 
+# Copy nginx config BEFORE app files
+COPY docker/nginx/conf.d/app.conf /etc/nginx/conf.d/default.conf
+
 # Set working directory
 WORKDIR /var/www/html
 

@@ -69,7 +69,7 @@ function splitCsvLine(line: string): string[] {
 const calculateGrade = (marks: number | string): string => {
   const score = typeof marks === 'string' ? parseFloat(marks) : marks;
   if (isNaN(score)) return '-';
-  
+
   if (score >= 75) return 'A';
   if (score >= 65) return 'B';
   if (score >= 50) return 'C';
@@ -555,8 +555,8 @@ export default function AddResults() {
                     <tr>
                       <th className="text-left px-4 py-2">Student</th>
                       <th className="text-left px-4 py-2">Student ID</th>
-                      <th className="text-left px-4 py-2">Course</th>
-                      <th className="text-left px-4 py-2">Code</th>
+                      {/* <th className="text-left px-4 py-2">Course</th> */}
+                      <th className="text-left px-4 py-2">Course Code</th>
                       <th className="text-center px-4 py-2">Credits</th>
                       <th className="text-center px-4 py-2">Semester</th>
                       <th className="text-center px-4 py-2">Year</th>
@@ -569,8 +569,8 @@ export default function AddResults() {
                     {rows.map((r)=>(
                       <tr key={r.id} className="border-t">
                         <td className="px-4 py-2">{r.student?.name ?? "-"}</td>
-                        <td className="px-4 py-2">{r.student_id}</td>
-                        <td className="px-4 py-2">{r.course?.title ?? "-"}</td>
+                        <td className="px-4 py-2">{r.student.id}</td>
+                        {/* <td className="px-4 py-2">{r.course?.title ?? "-"}</td> */}
                         <td className="px-4 py-2">{r.course?.code ?? "-"}</td>
                         <td className="px-4 py-2 text-center">{r.course?.credits ?? "-"}</td>
                         <td className="px-4 py-2 text-center">{r.semester}</td>
