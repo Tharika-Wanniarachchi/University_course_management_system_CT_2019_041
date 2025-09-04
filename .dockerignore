@@ -1,4 +1,41 @@
+# Node.js
 node_modules
-dist
-.vite
-*.log
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Development
+.dockerignore
+Dockerfile
+.docker
+.env
+.env.*
+!.env.example
+.docker-compose.override.yml
+.docker-sync
+.idea
+.vscode
+*.sublime-*
+*.code-workspace
+
+# Testing
+.phpunit.result.cache
+coverage
+.phpunit.cache
+
+# Frontend
+frontend/node_modules
+frontend/dist
+frontend/.vite
+frontend/*.log
+
+# Ignore development files but keep production-necessary ones
+!public/build
+!public/hot
+!public/storage
+!public/vendor
+!bootstrap/cache
+!storage
+!storage/app/public
+!storage/framework
+!storage/logs
